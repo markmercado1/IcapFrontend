@@ -1,0 +1,310 @@
+<div class="contenedor-principal">
+  <!-- Caja Izquierda -->
+  <!-- Caja Izquierda -->
+  <div class="panel panel-izquierdo">
+    <mat-card>
+      <mat-card-title>Información adicional</mat-card-title>
+
+      <!-- Selector de modo de búsqueda -->
+      <mat-radio-group [(ngModel)]="modoBusqueda">
+        <mat-radio-button value="dni">Buscar por DNI</mat-radio-button>
+        <mat-radio-button value="id">Buscar por ID Agremiado</mat-radio-button>
+      </mat-radio-group>
+
+      <!-- Input para DNI -->
+      <mat-form-field *ngIf="modoBusqueda === 'dni'" appearance="fill">
+        <mat-label>DNI</mat-label>
+        <input
+          matInput
+          [(ngModel)]="dni"
+          placeholder="Ej: 031911"
+          (ngModelChange)="dniInput$.next($event)"
+        />
+      </mat-form-field>
+
+      <!-- Input para ID -->
+      <mat-form-field *ngIf="modoBusqueda === 'id'" appearance="fill">
+        <mat-label>ID Agremiado</mat-label>
+
+        <input
+          matInput
+          [(ngModel)]="idAgremiado"
+          placeholder="Ej: 1234"
+          (ngModelChange)="idInput$.next($event)"
+        />
+      </mat-form-field>
+
+      <!-- Mostrar info del agremiado si existe -->
+      <div *ngIf="agremiadoSeleccionado">
+        <p><strong>Nombre:</strong> {{ agremiadoSeleccionado.anombres }}</p>
+        <p>
+          <strong>Apellidos:</strong>
+          {{ agremiadoSeleccionado.aapellidoPaterno }} {{
+          agremiadoSeleccionado.aapellidoMaterno }}
+        </p>
+        <p>
+          <strong>Último Pago:</strong>
+          {{ agremiadoSeleccionado.ultimoPago ?
+          (agremiadoSeleccionado.ultimoPago | date: 'longDate') : 'Sin registro'
+          }}
+        </p>
+        <p>
+          <strong>Habil Hasta:</strong>
+          {{ agremiadoSeleccionado.ahabilHasta ?
+          (agremiadoSeleccionado.ahabilHasta | date: 'longDate') : 'Sin
+          registro' }}
+        </p>
+        <p>
+          <strong>Estado Colegiado:</strong>
+          {{ agremiadoSeleccionado.estadoColegiado.ecDescripcion }}
+        </p>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Caja Derecha -->
+  <div class="panel panel-derecho">
+    <mat-card class="orden-card">
+      <mat-card-title>Orden de cobranza</mat-card-title>
+
+      <!-- Sección de agregar conceptos -->
+      <div class="form-grid">
+        <!-- ... (otros campos como DNI/ID) ... -->
+
+        <div class="concepto-container">
+          <!-- Selector de Concepto -->
+          <mat-form-field appearance="fill" class="concepto-field">
+            <mat-label>Concepto</mat-label>
+            <mat-select
+              [(ngModel)]="conceptoSeleccionado"
+              (selectionChange)="actualizarMonto()"
+            >
+              <mat-option
+                *ngFor="let opcion of conceptosPredefinidos"
+                [value]="opcion.descripcion"
+              >
+                {{ opcion.descripcion }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Campos dinámicos según concepto seleccionado -->
+          <div class="concepto-details" *ngIf="conceptoSeleccionado">
+            <!-- Campo para descripción personalizada -->
+            <mat-form-field
+              *ngIf="conceptoSeleccionado === 'Otros'"
+              appearance="fill"
+              class="descripcion-field"
+            >
+              <mat-label>Descripción</mat-label>
+              <input
+                matInput
+                [(ngModel)]="conceptoActual.descripcion"
+                placeholder="Ej. Servicio especial"
+              />
+            </mat-form-field>
+
+            <!-- Monto -->
+            <mat-form-field appearance="fill" class="monto-field">
+              <mat-label>Monto (S/)</mat-label>
+              <input
+                matInput
+                type="number"
+                [(ngModel)]="conceptoActual.monto"
+              />
+            </mat-form-field>
+
+            <!-- Mes/Año (solo para Mensualidad) -->
+            <div
+              *ngIf="conceptoSeleccionado === 'Mensualidad'"
+              class="mes-anio-fields"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label>Mes</mat-label>
+                <mat-select [(ngModel)]="conceptoActual.mes">
+                  <mat-option
+                    *ngFor="let m of mesesDisponibles"
+                    [value]="m.valor"
+                    >{{ m.nombre }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Año</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  [(ngModel)]="conceptoActual.anio"
+                />
+              </mat-form-field>
+            </div>
+
+            <!-- Botón para agregar -->
+            <button
+              mat-mini-fab
+              color="primary"
+              (click)="agregarConcepto()"
+              class="add-button"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="tabla-titulo">Resumen de conceptos</h3>
+      <table
+        mat-table
+        [dataSource]="conceptos"
+        class="mat-elevation-z2 conceptos-table"
+      >
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Concepto</th>
+          <td mat-cell *matCellDef="let c">{{c.descripcion}}</td>
+        </ng-container>
+        <ng-container matColumnDef="mes">
+          <th mat-header-cell *matHeaderCellDef>Mes</th>
+          <td mat-cell *matCellDef="let c">{{c.mes}}</td>
+        </ng-container>
+        <ng-container matColumnDef="año">
+          <th mat-header-cell *matHeaderCellDef>Año</th>
+          <td mat-cell *matCellDef="let c">{{c.anio}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef>Monto</th>
+          <td mat-cell *matCellDef="let c">S/ {{c.monto}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let c; let i = index">
+            <button mat-button color="warn" (click)="eliminarConcepto(i)">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="total-row">
+          <td colspan="1" class="text-right font-bold">Total:</td>
+          <td>S/ {{ getTotal() }}</td>
+          <td></td>
+        </tr>
+      </table>
+
+      <div class="boton-generar">
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="!(dni || idAgremiado) || conceptos.data.length === 0"
+          (click)="generarOrden()"
+        >
+          Generar Orden
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Caja Inferior -->
+<div class="panel-inferior">
+  <h2>Órdenes de Cobranza</h2>
+  <table
+    mat-table
+    [dataSource]="ordenesDataSource"
+    class="mat-elevation-z2"
+    *ngIf="ordenesDataSource.length"
+  >
+    <!-- ID de Orden -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let o">{{ o.idOrden }}</td>
+    </ng-container>
+
+    <!-- ID de Agremiado -->
+    <ng-container matColumnDef="agremiadoId">
+      <th mat-header-cell *matHeaderCellDef>Agremiado</th>
+      <td mat-cell *matCellDef="let o">{{ o.agremiado?.idAgremiado }}</td>
+    </ng-container>
+
+    <!-- Nombre del Agremiado -->
+    <ng-container matColumnDef="nombreAgremiado">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let o">
+        {{ o.agremiado?.aApellidoPaterno }} {{ o.agremiado?.aApellidoMaterno }}
+        {{ o.agremiado?.anombres }}
+      </td>
+    </ng-container>
+
+    <!-- Fecha -->
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let o">{{ o.fechaGeneracion }}</td>
+    </ng-container>
+
+    <!-- Total -->
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total</th>
+      <td mat-cell *matCellDef="let o">S/ {{ o.total }}</td>
+    </ng-container>
+
+    <!-- Estado -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td
+        mat-cell
+        *matCellDef="let o"
+        [ngClass]="{
+      'estado-pagado': o.estado === 'Pagado',
+      'estado-cancelado': o.estado === 'Cancelado',
+      'estado-pendiente': o.estado === 'PENDIENTE'
+    }"
+      >
+        {{ o.estado }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let o">
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="marcarComoPagado(o)"
+          [disabled]="o.estado !== 'PENDIENTE'"
+        >
+          <mat-icon>check_circle</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="marcarComoCancelado(o)"
+          [disabled]="o.estado !== 'PENDIENTE'"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+
+        <button mat-button color="primary" (click)="verOrdenPDF(o.idOrden)">
+          Ver PDF
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displaysedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displaysedColumns;"></tr>
+  </table>
+<mat-paginator #matPaginator
+               [length]="totalItems"
+               [pageSize]="pageSize"
+               [pageIndex]="currentPage"
+               [pageSizeOptions]="[5, 10, 20]"
+               (page)="onPageChange($event)"
+               showFirstLastButtons>
+</mat-paginator>
+</div>

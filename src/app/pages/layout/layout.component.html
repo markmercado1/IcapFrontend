@@ -1,0 +1,104 @@
+<div class="admin-container">
+  <!-- App Bar Superior -->
+  <mat-toolbar class="admin-toolbar">
+    <button class="menu-toggle" mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>{{ sidenav.opened ? 'close' : 'menu' }}</mat-icon>
+    </button>
+    
+    <div class="brand-container">
+      <span class="brand-name">ICAP</span>
+      <span class="brand-subtitle">Panel de Control</span>
+    </div>
+    
+    <div class="toolbar-spacer"></div>
+    
+    <button mat-icon-button class="user-menu" [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    
+    <mat-menu #menu="matMenu" class="user-dropdown">
+      <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Mi Perfil</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
+  <!-- Sidebar Navigation -->
+  <mat-sidenav-container class="admin-sidenav-container">
+    <mat-sidenav #sidenav class="admin-sidenav" mode="over" fixedInViewport="true">
+      <div class="sidebar-header">
+        <img src="Insignia.png" alt="Logo ICAP" class="sidebar-logo">
+      </div>
+      
+      <mat-nav-list class="sidebar-menu">
+        <!-- Grupo 1: Pagos -->
+        <div class="menu-group">
+          <div class="group-title">Gestión de Pagos</div>
+          <a mat-list-item routerLink="/pages/dashboard" routerLinkActive="active">
+            <mat-icon>payments</mat-icon>
+            <span>Pagos</span>
+          </a>
+          <a mat-list-item routerLink="/pages/generar-orden" routerLinkActive="active">
+            <mat-icon>request_quote</mat-icon>
+            <span>Orden de Cobranza</span>
+          </a>
+          <a mat-list-item routerLink="/pages/listar-orden" routerLinkActive="active">
+            <mat-icon>list_alt</mat-icon>
+            <span>Lista de Órdenes</span>
+          </a>
+          <a mat-list-item routerLink="/pages/mensualidades" routerLinkActive="active">
+            <mat-icon>receipt_long</mat-icon>
+            <span>Mensualidades</span>
+          </a>
+        </div>
+        
+        <!-- Grupo 2: Agremiados -->
+        <div class="menu-group">
+          <div class="group-title">Gestión de Agremiados</div>
+          <a mat-list-item routerLink="/pages/agremiados" routerLinkActive="active">
+            <mat-icon>badge</mat-icon>
+            <span>Agremiados</span>
+          </a>
+          <a mat-list-item routerLink="/pages/gsagremiados" routerLinkActive="active">
+            <mat-icon>group_work</mat-icon>
+            <span>Gestión Agremiados</span>
+          </a>
+          <a mat-list-item routerLink="/pages/validar-documento" routerLinkActive="active">
+            <mat-icon>verified</mat-icon>
+            <span>Validar Documentos</span>
+          </a>
+        </div>
+        
+        <!-- Grupo 3: Eventos y Cursos -->
+        <div class="menu-group">
+          <div class="group-title">Eventos y Capacitación</div>
+          <a mat-list-item routerLink="/pages/gseventos" routerLinkActive="active">
+            <mat-icon>event_available</mat-icon>
+            <span>Eventos</span>
+          </a>
+          <a mat-list-item routerLink="/pages/gscursos" routerLinkActive="active">
+            <mat-icon>school</mat-icon>
+            <span>Cursos</span>
+          </a>
+        </div>
+      </mat-nav-list>
+      
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <mat-icon>account_circle</mat-icon>
+          <span>Usuario Actual</span>
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <!-- Contenido Principal -->
+    <mat-sidenav-content class="admin-content">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -1,0 +1,41 @@
+<div class="carousel-wrapper">
+  <h2 class="section-title">Eventos Destacados</h2>
+  <p class="section-subtitle">Conoce nuestras actividades académicas y profesionales</p>
+  
+  <div class="carousel-container" *ngIf="eventos.length > 0">
+    <div class="carousel-track" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+      <mat-card class="carousel-card" *ngFor="let evento of eventos">
+        <div class="card-image-container">
+          <img [src]="'data:image/jpeg;base64,' + evento.eimagen" alt="Imagen del evento" class="carousel-img">
+          <div class="event-date">
+            <mat-icon>calendar_today</mat-icon>
+            <span>{{evento.efechaInicio| date}}</span>
+          </div>
+        </div>
+        <mat-card-content>
+          <h3>{{evento.etitulo}}</h3>
+          <p>{{evento.edescripcion | truncate: 120}}</p>
+          <button mat-flat-button color="primary" class="event-button">Ver Detalles</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <button mat-icon-button class="nav-button prev" (click)="prev()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button mat-icon-button class="nav-button next" (click)="next()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+
+    <div class="carousel-dots">
+      <span *ngFor="let item of eventos; let i = index" 
+            [class.active]="i === currentIndex"
+            (click)="goToIndex(i)"></span>
+    </div>
+  </div>
+
+  <div *ngIf="eventos.length === 0" class="no-events">
+    <mat-icon>event_busy</mat-icon>
+    <p>No hay eventos programados</p>
+  </div>
+</div>

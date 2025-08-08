@@ -1,0 +1,151 @@
+<mat-card appearance="outlined" class="form-card">
+  <mat-card-header>
+    <mat-card-title>Formulario Eventos</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form
+      [formGroup]="eventoForm"
+      (ngSubmit)="operar()"
+      enctype="multipart/form-data"
+      class="form-grid"
+    >
+      <!-- Título -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Título del Evento</mat-label>
+        <input matInput formControlName="eTitulo" placeholder="Título" />
+        <mat-error
+          *ngIf="eventoForm.get('eTitulo')?.invalid && eventoForm.get('eTitulo')?.touched"
+        >
+          Campo requerido (máx. 200 caracteres)
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Descripción -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          formControlName="eDescripcion"
+          placeholder="Descripción"
+        ></textarea>
+        <mat-error
+          *ngIf="eventoForm.get('eDescripcion')?.invalid && eventoForm.get('eDescripcion')?.touched"
+        >
+          Campo requerido (máx. 500 caracteres)
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Fechas -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Inicio</mat-label>
+          <input
+            matInput
+            [matDatepicker]="inicioPicker"
+            formControlName="eFechaInicio"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="inicioPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #inicioPicker></mat-datepicker>
+          <mat-error
+            *ngIf="eventoForm.get('eFechaInicio')?.invalid && eventoForm.get('eFechaInicio')?.touched"
+          >
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Fin</mat-label>
+          <input
+            matInput
+            [matDatepicker]="finPicker"
+            formControlName="eFechaFin"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="finPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #finPicker></mat-datepicker>
+          <mat-error
+            *ngIf="eventoForm.get('eFechaFin')?.invalid && eventoForm.get('eFechaFin')?.touched"
+          >
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Estado y creación -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="eEstado">
+            <mat-option value="ACTIVO">Activo</mat-option>
+            <mat-option value="INACTIVO">Inactivo</mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="eventoForm.get('eEstado')?.invalid && eventoForm.get('eEstado')?.touched"
+          >
+            Selecciona un estado
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Creación</mat-label>
+          <input matInput formControlName="eFechaCreacion" [disabled]="true" />
+        </mat-form-field>
+      </div>
+      <!-- Trabajador -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Trabajador</mat-label>
+        <mat-select formControlName="trabajador">
+          <mat-option *ngFor="let t of trabajadores" [value]="t.idTrabajador">
+            {{ t.tnombre }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="eventoForm.get('trabajador')?.invalid && eventoForm.get('trabajador')?.touched"
+        >
+          Selecciona un trabajador
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Imagen -->
+      <div class="form-upload">
+        <label for="imagen">Imagen (opcional)</label>
+        <input
+          type="file"
+          id="imagen"
+          (change)="onFileSelect($event, 'eImagen')"
+          accept="image/*"
+        />
+      </div>
+
+      <!-- Documento -->
+      <div class="form-upload">
+        <label for="documento">Documento (opcional)</label>
+        <input
+          type="file"
+          id="documento"
+          (change)="onFileSelect($event, 'eDocumento')"
+          accept=".pdf,.doc,.docx"
+        />
+      </div>
+
+      <!-- Botones -->
+      <div class="button-row">
+        <button mat-flat-button color="primary" type="submit">Guardar</button>
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

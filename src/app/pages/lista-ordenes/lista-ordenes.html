@@ -1,0 +1,31 @@
+<h2>Órdenes de Cobranza</h2>
+<table mat-table [dataSource]="ordenes" class="mat-elevation-z2" *ngIf="ordenes.length">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let o">{{ o.idOrden }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="agremiado">
+    <th mat-header-cell *matHeaderCellDef>Agremiado</th>
+    <td mat-cell *matCellDef="let o">{{ o.agremiado?.dni }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef>Fecha</th>
+    <td mat-cell *matCellDef="let o">{{ o.fechaGeneracion }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef>Total</th>
+    <td mat-cell *matCellDef="let o">S/ {{ o.total }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef>Estado</th>
+    <td mat-cell *matCellDef="let o">{{ o.estado }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

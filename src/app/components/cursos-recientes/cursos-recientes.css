@@ -1,0 +1,19 @@
+.cursos {
+  padding: 20px;
+  background: #f7f7f7;
+}
+
+.cursos h2 {
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.cursos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.curso-card {
+  padding: 8px;
+}

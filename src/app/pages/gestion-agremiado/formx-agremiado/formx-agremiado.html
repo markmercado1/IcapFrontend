@@ -1,0 +1,122 @@
+<mat-card appearance="outlined" class="example-card">
+  <mat-card-header>
+    <mat-card-title>Formulario de Agremiado</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="agremmiadForm" (ngSubmit)="operar()" class="form-grid">
+
+      <!-- Nombres y Apellidos -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="aNombres" placeholder="Nombres del agremiado" />
+          <mat-error *ngIf="f['aNombres'].invalid && f['aNombres'].touched">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput formControlName="aApellidoPaterno" placeholder="Apellido paterno" />
+          <mat-error *ngIf="f['aApellidoPaterno'].invalid && f['aApellidoPaterno'].touched">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput formControlName="aApellidoMaterno" placeholder="Apellido materno" />
+          <mat-error *ngIf="f['aApellidoMaterno'].invalid && f['aApellidoMaterno'].touched">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- DNI, Celular, Correo -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>DNI</mat-label>
+          <input matInput formControlName="dni" placeholder="Número de documento" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Celular</mat-label>
+          <input matInput formControlName="aCelular" placeholder="Número de celular" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="aCorreo" placeholder="Correo electrónico" />
+        </mat-form-field>
+      </div>
+
+      <!-- Ciudad, Fecha Nacimiento, Fecha Incorporación -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Ciudad</mat-label>
+          <input matInput formControlName="aCiudad" placeholder="Ciudad de residencia" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Nacimiento</mat-label>
+          <input matInput type="date" formControlName="aFechaNacimiento" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Fecha de Incorporación</mat-label>
+          <input matInput type="date" formControlName="aFechaIncorporacion" />
+        </mat-form-field>
+      </div>
+
+      <!-- Género, Tipo Colegiado, Estado Colegiado -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="genero">
+            <mat-option value="M">Masculino</mat-option>
+            <mat-option value="F">Femenino</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de Colegiado</mat-label>
+          <mat-select formControlName="tipoColegiado">
+            <mat-option *ngFor="let tc of tipoColegiados" [value]="tc.idTipoColegiado">
+              {{ tc.tcDescripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Estado de Colegiado</mat-label>
+          <mat-select formControlName="estadoColegiado">
+            <mat-option *ngFor="let ec of estadoColegiados" [value]="ec.idEstadoColegiado">
+              {{ ec.ecDescripcion }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Trabajador Asignado -->
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Trabajador Asignado</mat-label>
+          <mat-select formControlName="trabajador">
+            <mat-option *ngFor="let t of trabajadores" [value]="t.idTrabajador">
+              {{ t.tnombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Botones -->
+      <div class="example-button-row">
+        <button mat-flat-button color="primary" type="submit">Guardar</button>
+        <button mat-stroked-button color="warn" type="button" routerLink="/pages/gsagremiados">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

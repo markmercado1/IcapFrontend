@@ -1,0 +1,88 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Bienvenido al Panel de Control</h1>
+    <p class="dashboard-subtitle">Gestión integral de agremiados y servicios</p>
+  </div>
+
+  <div class="card-grid">
+    <!-- Tarjeta 1 - Orden de cobranza -->
+    <mat-card class="dashboard-card" [routerLink]="['/pages', 'generar-orden']">
+      <div class="card-gradient"></div>
+      <div class="card-content">
+        <div class="icon-container">
+          <mat-icon class="dashboard-icon">payments</mat-icon>
+        </div>
+        <h3>Orden de cobranza</h3>
+        <p>Gestiona las ordenes de cobranza.</p>
+        <div class="card-hover-content">
+          <span class="hover-text">Acceder ahora</span>
+          <mat-icon class="hover-arrow">arrow_forward</mat-icon>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta 2 - Agremiados -->
+    <mat-card class="dashboard-card" [routerLink]="['/pages', 'gsagremiados']">
+      <div class="card-gradient"></div>
+      <div class="card-content">
+        <div class="icon-container">
+          <mat-icon class="dashboard-icon">groups</mat-icon>
+        </div>
+        <h3>Agremiados</h3>
+        <p>Revisa y administra la lista de agremiados registrados.</p>
+        <div class="card-hover-content">
+          <span class="hover-text">Acceder ahora</span>
+          <mat-icon class="hover-arrow">arrow_forward</mat-icon>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta 3 - Eventos -->
+    <mat-card class="dashboard-card" [routerLink]="['/pages', 'gseventos']">
+      <div class="card-gradient"></div>
+      <div class="card-content">
+        <div class="icon-container">
+          <mat-icon class="dashboard-icon">event</mat-icon>
+        </div>
+        <h3>Eventos</h3>
+        <p>Controla los eventos disponibles y futuros.</p>
+        <div class="card-hover-content">
+          <span class="hover-text">Acceder ahora</span>
+          <mat-icon class="hover-arrow">arrow_forward</mat-icon>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta 4 - Validación de Documentos -->
+    <mat-card class="dashboard-card" [routerLink]="['/pages', 'validar-documento']">
+      <div class="card-gradient"></div>
+      <div class="card-content">
+        <div class="icon-container">
+          <mat-icon class="dashboard-icon">description</mat-icon>
+        </div>
+        <h3>Validación de Documentos</h3>
+        <p>Verifica los documentos enviados por los agremiados.</p>
+        <div class="card-hover-content">
+          <span class="hover-text">Acceder ahora</span>
+          <mat-icon class="hover-arrow">arrow_forward</mat-icon>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta 5 - Cursos -->
+    <mat-card class="dashboard-card" [routerLink]="['/pages', 'gscursos']">
+      <div class="card-gradient"></div>
+      <div class="card-content">
+        <div class="icon-container">
+          <mat-icon class="dashboard-icon">school</mat-icon>
+        </div>
+        <h3>Cursos</h3>
+        <p>Gestiona los cursos disponibles para agremiados.</p>
+        <div class="card-hover-content">
+          <span class="hover-text">Acceder ahora</span>
+          <mat-icon class="hover-arrow">arrow_forward</mat-icon>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

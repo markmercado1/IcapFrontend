@@ -1,0 +1,80 @@
+/* Estilos generales para la sección */
+.noticias {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.noticias h2 {
+  color: #1a365d;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.noticias h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: #1976d2;
+}
+.facebook-feed {
+  width: 100%;
+  max-width: 900px; /* Permitir que crezca al ancho del contenedor */
+  margin: 0 auto;
+  background: white;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  display: flex;
+  justify-content: center; /* Centra internamente */
+}
+
+.fb-column {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px; /* Igual al ancho del widget */
+}
+
+.facebook-feed .fb-page,
+.facebook-feed .fb-page span,
+.facebook-feed .fb-page iframe {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  display: block !important;
+}
+
+.facebook-feed .fb-page iframe {
+  min-height: 600px;
+  height: 100% !important;
+}
+
+.fb-xfbml-parse-ignore {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .facebook-feed {
+    padding: 0;
+  }
+
+  .fb-column {
+    max-width: 100%;
+  }
+
+  .facebook-feed .fb-page iframe {
+    min-height: 500px;
+  }
+}

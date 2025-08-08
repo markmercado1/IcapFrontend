@@ -1,0 +1,30 @@
+
+
+<div class="container">
+  <div class="form-group">
+    <label>ID del agremiado:</label>
+    <input type="number" [(ngModel)]="idAgremiado" />
+    <button (click)="buscarPagos()">Buscar</button>
+  </div>
+
+  <div *ngIf="buscando" class="loading">Buscando...</div>
+
+  <table *ngIf="meses.length > 0">
+    <thead>
+      <tr>
+        <th>Año</th>
+        <th>Mes</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mes of meses">
+        <td>{{ mes.anio }}</td>
+        <td>{{ nombreMes(mes.mes) }}</td>
+        <td [ngClass]="mes.pagado ? 'estado-pagado' : 'estado-no-pagado'">
+          {{ mes.pagado ? 'Pagado' : 'No Pagado' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,43 @@
+.form-card {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.form-row mat-form-field {
+  flex: 1;
+  min-width: 250px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-upload {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.form-upload input[type="file"] {
+  margin-top: 4px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 20px;
+}

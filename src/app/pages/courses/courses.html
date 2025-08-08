@@ -1,0 +1,107 @@
+<router-outlet />
+<h2 style="margin: 10px 0;">Módulo de Cursos</h2>
+<div class="example-button-row">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Mia"
+      #input
+    />
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- ID Column -->
+    <ng-container matColumnDef="idCurso">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{row.idCurso}}</td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
+    </ng-container>
+    <!-- descripcion Column -->
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripcion</th>
+      <td mat-cell *matCellDef="let row">{{row.descripcion}}</td>
+    </ng-container>
+    <!-- fechaInicio  -->
+    <ng-container matColumnDef="fechaInicio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>F. inicio</th>
+      <td mat-cell *matCellDef="let row">{{ row.fechaInicio | date }}</td>
+    </ng-container>
+        <!-- fechaFin  -->
+    <ng-container matColumnDef="fechaFin">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>F. fin</th>
+      <td mat-cell *matCellDef="let row">{{ row.fechaFin | date }}</td>
+    </ng-container>
+        <!-- modalidad Column -->
+    <ng-container matColumnDef="modalidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Modalidad</th>
+      <td mat-cell *matCellDef="let row">{{row.modalidad}}</td>
+    </ng-container>
+        <!-- Name Column -->
+    <ng-container matColumnDef="docente">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Docente</th>
+      <td mat-cell *matCellDef="let row">{{row.docente}}</td>
+    </ng-container>
+            <!-- estado Column -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+      <td mat-cell *matCellDef="let row"><span [style.color]="row.estado === 'ACTIVO' ? 'green' : 'red'" style="font-weight: bold;">
+      {{ row.estado }}
+    </span>
+</td>
+    </ng-container>
+
+    <ng-container matColumnDef="trabajador">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Trabajador</th>
+      <td mat-cell *matCellDef="let row">{{row.trabajador.tnombre}}</td>
+    </ng-container>
+    <ng-container matColumnDef="acciones">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        style="align-content: center"
+      >
+        Acciones
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="example-button-row">
+          <button mat-button [routerLink]="['edit', row.idCurso]">
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+          <button mat-button (click)="eliminar(row.idCurso)">
+            <mat-icon style="color: red">delete_sweep</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{input.value}}"
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[2, 5, 25, 100]"
+    [length]="totalElements"
+    (page)="showMore($event)"
+    aria-label="Select page of users"
+  ></mat-paginator>
+  <button
+    mat-fab
+    color="primary"
+    style="float: right"
+    routerLink="/pages/gscursos/new"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

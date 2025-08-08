@@ -1,0 +1,24 @@
+<section class="cursos">
+  <h2>Cursos Recientes</h2>
+  <div class="cursos-container">
+    <mat-card class="curso-card" *ngFor="let curso of cursos">
+      <mat-card-header>
+        <mat-card-title>{{ curso.nombre }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ curso.docente }} | {{ curso.modalidad }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Inicio:</strong> {{ curso.fechaInicio | date }}</p>
+        <p><strong>Fin:</strong> {{ curso.fechaFin | date }}</p>
+        <p>{{ curso.descripcion }}</p>
+        <p>
+          <strong>Estado:</strong>
+          <span [style.color]="curso.estado === 'ACTIVO' ? 'green' : 'red'">
+            {{ curso.estado }}
+          </span>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

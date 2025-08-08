@@ -1,0 +1,258 @@
+:root {
+  --primary-color: #1976d2;
+  --accent-color: #e91e63;
+  --bg-light: #f5f5f5;
+  --border-radius: 12px;
+  --text-light: #444;
+}
+
+/* ================================
+   BASE GLOBAL
+================================== */
+body {
+  background-color: var(--bg-light);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+/* ================================
+   CONTENEDORES PRINCIPALES
+================================== */
+.contenedor-principal {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin: 30px 20px;
+  flex-wrap: wrap;
+}
+
+.panel-izquierdo,
+.panel-derecho {
+  background-color: white;
+  padding: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.panel-izquierdo {
+  flex: 1;
+  min-width: 320px;
+}
+
+.panel-derecho {
+  flex: 2.5;
+  min-width: 600px;
+}
+
+.panel-inferior {
+  background: white;
+  padding: 24px;
+  margin: 0 20px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.panel-inferior h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+}
+
+/* ================================
+   CARDS Y TITULOS
+================================== */
+mat-card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+mat-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+mat-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 16px;
+}
+
+/* ================================
+   FORMULARIOS
+================================== */
+mat-form-field {
+  width: 100%;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.add-button {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  font-weight: 500;
+}
+
+button:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ================================
+   INTERACCIÓN DE INPUTS
+================================== */
+.mat-form-field.mat-focused .mat-form-field-outline {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+/* ================================
+   VISUAL INFO DEL AGREMIADO
+================================== */
+.panel-izquierdo p {
+  margin: 6px 0;
+  color: var(--text-light);
+}
+
+.panel-izquierdo p strong {
+  color: var(--primary-color);
+  display: inline-block;
+  width: 140px;
+}
+
+.bloque-separado {
+  padding: 16px 0;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 12px;
+}
+
+/* ================================
+   TABLAS
+================================== */
+.tabla-titulo {
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.conceptos-table {
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.mat-header-cell {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+table.mat-table tr:hover {
+  background-color: #f0f7ff;
+  cursor: pointer;
+}
+
+.total-row td {
+  font-weight: bold;
+  padding: 12px;
+  background-color: #f0f0f0;
+  border-top: 2px solid #ddd;
+}
+
+.boton-generar {
+  margin-top: 24px;
+  text-align: right;
+}
+
+/* ================================
+   ICONOS Y BOTONES DE ACCIÓN
+================================== */
+button[mat-button] mat-icon {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.mat-icon-button {
+  margin-right: 4px;
+  background-color: rgba(25, 118, 210, 0.1);
+  border-radius: 50%;
+}
+
+.mat-icon-button:hover {
+  background-color: rgba(25, 118, 210, 0.2);
+}
+
+/* ================================
+   OTROS ELEMENTOS
+================================== */
+iframe {
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+/* Estado visual según estado */
+.estado-pagado {
+  color: green;
+  font-weight: bold;
+}
+
+.estado-cancelado {
+  color: red;
+  font-weight: bold;
+}
+
+.estado-pendiente {
+  color: orange;
+  font-weight: bold;
+}
+.concepto-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.concepto-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mes-anio-fields {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.add-button {
+  margin-left: auto;
+}
+
+/* Ajusta el ancho de los campos */
+.concepto-field, .descripcion-field {
+  width: 100%;
+}
+
+.monto-field {
+  width: 120px;
+}

@@ -1,0 +1,84 @@
+.agremiado-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.titulo-agremiados {
+  color: #2f790d;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.inputField {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tabla-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th {
+  background-color: #2f790d;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+}
+
+.styled-table td, .styled-table th {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tr:hover {
+  background-color: #f1f8ee;
+}
+.estado-habilitado {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.estado-no-habilitado {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.estado-fallecido {
+  background-color: #e2e3e5;
+  color: #6c757d;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.estado-inactivo {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.estado-baja {
+  background-color: #cce5ff;
+  color: #004085;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}

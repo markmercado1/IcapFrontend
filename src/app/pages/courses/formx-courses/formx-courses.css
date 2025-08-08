@@ -1,0 +1,44 @@
+.example-card {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.example-button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+button {
+  min-width: 120px;
+}
+
+.estado-activo {
+  color: green;
+  font-weight: bold;
+}
+
+.estado-inactivo {
+  color: red;
+  font-weight: bold;
+}

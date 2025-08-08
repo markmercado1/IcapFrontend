@@ -1,0 +1,89 @@
+  .container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #fdfdfd;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .form-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #333;
+  }
+
+  input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 150px;
+    transition: border-color 0.3s;
+  }
+
+  input[type="number"]:focus {
+    border-color: #1976d2;
+    outline: none;
+  }
+
+  button {
+    padding: 8px 16px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #115293;
+  }
+
+  .loading {
+    color: #1976d2;
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  thead {
+    background-color: #1976d2;
+    color: white;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .estado-pagado {
+    color: green;
+    font-weight: bold;
+  }
+
+  .estado-no-pagado {
+    color: red;
+    font-weight: bold;
+  }

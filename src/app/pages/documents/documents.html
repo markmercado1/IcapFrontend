@@ -1,0 +1,22 @@
+<mat-card class="upload-container">
+  <mat-card-title>Subir Documento</mat-card-title>
+
+  <mat-card-content>
+    <input type="file" (change)="onFileChange($event)" accept=".pdf" />
+
+    <div style="margin-top: 10px;">
+      <button mat-raised-button color="primary"
+              (click)="subir()"
+              [disabled]="!archivoSeleccionado || cargando">
+        {{ cargando ? 'Validando...' : 'Subir y Validar' }}
+      </button>
+
+      <mat-spinner *ngIf="cargando" diameter="30" style="margin-left: 10px;"></mat-spinner>
+    </div>
+
+    <div class="resultado" *ngIf="resultado" style="margin-top: 20px;">
+      <mat-icon color="accent">check_circle</mat-icon>
+      <strong>Resultado:</strong> {{ resultado }}
+    </div>
+  </mat-card-content>
+</mat-card>
