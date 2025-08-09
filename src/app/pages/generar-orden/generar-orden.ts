@@ -233,7 +233,7 @@ export class GenerarOrdenComponent implements AfterViewInit {
         alert(resp.mensaje);
 
         // 1. Generar PDF
-        const rawUrl = `http://localhost:6060/api/ordenes/pdf/${resp.idOrden}`;
+        const rawUrl = `${environment.HOST}/${resp.idOrden}`;
         const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(rawUrl);
 
         this.ordenPdfUrl = safeUrl;
@@ -264,8 +264,7 @@ export class GenerarOrdenComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   verPDF() {
     if (this.ultimaOrdenGenerada) {

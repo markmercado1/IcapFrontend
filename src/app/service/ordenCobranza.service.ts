@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({ providedIn: 'root' })
 export class OrdenCobranzaService {
-  private apiUrl = 'http://localhost:6060/api/ordenes';
+  private apiUrl = `${environment.HOST}/api/ordenes`;
 
   constructor(private http: HttpClient) {}
   raw(idOrden: number): Observable<Blob> {
